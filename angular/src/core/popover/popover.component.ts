@@ -14,7 +14,7 @@ import { NgbPopover } from "@ng-bootstrap/ng-bootstrap";
   templateUrl: "./popover.component.html",
   styleUrls: ["./popover.component.scss"]
 })
-export class PopoverComponent implements OnInit {
+export class PopoverComponent implements OnInit{
   /**
    * Open or close popover;
    * Default: close 
@@ -40,3 +40,4 @@ export class PopoverComponent implements OnInit {
     this.popover.open()
   }
 }
+ 

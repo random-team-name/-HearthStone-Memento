@@ -1,11 +1,20 @@
 import { Component, Renderer2, ViewChildren, ElementRef, QueryList } from "@angular/core";
 import { NotificationsService } from "../providers/notifications.service";
 import * as bluebird from 'bluebird'
-import { CommonService } from "../../core/providers/common.service";
-import { Observable } from "rxjs";
+import { Observable } from "rxjs/Observable";
 
 /**
  * Display an mini-popup 
+ * @example
+ * const ns= new NotificationsService()
+ * const getFirstNotifId = _=>ns.notifications[0].id
+ * const random=_=>Math.random()
+ *
+ * <button (click)="ns.add('add','test')">Add notif</button>
+ * <button (click)="ns.delete(getFirstNotifId())">delete notif</button>
+ * <button (click)="ns.deleteAll()">delete all notif</button>
+ * <button (click)="ns.updateNotif(getFirstNotifId(),{title:random(),msg: random()})">Update notif</button>
+ * <notifications></notifications>
  */
 @Component({
   selector: "notifications",
@@ -19,26 +28,21 @@ export class NotificationsComponent {
   _notifications = []
 
   /**
-   * load dependencies instances
-   * @param ns to track notifications outside component
-   * @param renderer2
-   * @param common
+   * Load dependencies instances
    */
-  constructor(public ns: NotificationsService, private renderer2: Renderer2, private common: CommonService) {
+  constructor(public ns: NotificationsService, private renderer2: Renderer2) {
     this.ns.addEvent.subscribe(data => this._notifications.push(data))
     this.ns.removeEvent.subscribe((id:any) => this.deleteNotif(id))
   }
 
   /**
    * launch css animations and delete notification from id 
-   * @param id 
-   * @param html 
    */
-  deleteNotif(id) {
+  deleteNotif(id){
     return new Promise(async (resolve, reject) => {
       const htmlNotif = await this.getHtmlNotif(id)
-      if (!htmlNotif) return
-      this.renderer2.addClass(htmlNotif, "deleteNotif")
+      if(!htmlNotif) return
+      this.renderer2.addClass(htmlNotif,"deleteNotif")
       setTimeout(() => {
         this._notifications = this._notifications.filter(notif => notif.id !== id)
         resolve()
@@ -53,7 +57,11 @@ export class NotificationsComponent {
 
     return bluebird.each(this.htmlNotifications, htmlNotif=>{
       this.deleteNotif(htmlNotif.nativeElement.id)
-      return this.common.wait(50)
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve()
+        }, 50);  
+      });
     })
   }
 

@@ -3,7 +3,6 @@ import { TestBed, async } from '@angular/core/testing';
 import { FormErrorsComponent } from './form-errors.component';
 import { FormsModule } from '@angular/forms';
 
-import {  CoreModule } from '../core.module'
 
 describe('FormErrorsComponent', () => {
   beforeEach(async(() => {

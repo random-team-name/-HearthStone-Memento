@@ -2,6 +2,8 @@ import { Directive, OnDestroy, Input, AfterViewChecked, ElementRef, Renderer2} f
 
 /**
  * Load differents directive with an array of key value
+ * @example
+ * <input type="text" [formControlName]="'hello'" [validators]="form.controls['hello']"/>
  */
 @Directive({
   selector: '[validators]',
@@ -17,8 +19,6 @@ export class ValidatorsDirective implements AfterViewChecked{
 
   /**
    * Load some dependencies
-   * @param renderer 
-   * @param hostElement 
    */
   constructor(private renderer: Renderer2, private hostElement: ElementRef){}
   

@@ -1,22 +1,22 @@
 import { TestBed, async } from '@angular/core/testing';
-import { BootstrapModule } from '../bootstrap/bootstrap.module'
 import { PopoverComponent } from './popover.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 describe('PopoverComponent', () => {
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports:[
-        BootstrapModule
+        NgbModule.forRoot()
       ],
       declarations: [
         PopoverComponent
       ] 
     }).compileComponents();
-  }));
-  it('should create the app', async(() => {
+  });
+  it('should create the component', () => {
     const fixture = TestBed.createComponent(PopoverComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
-  }));
+  });
 });

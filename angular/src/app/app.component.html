@@ -1,7 +1,15 @@
-<div class="app-container">
-    <navbar></navbar>
-    <div class="content-container">
-        <sidebar></sidebar>
-        <router-outlet></router-outlet>
+<div id="app">
+    <notifications></notifications>
+    <navbar name="Hygisoft web">
+        <div logo>
+            <img src="assets/img/logo.png" alt="">
+        </div>
+    </navbar>
+    <div id="appBody">
+        <sidebar [conf]="navbarConf"></sidebar>
+        <div id="appContainer" [@routerTransition]="getState(o)">
+            <router-outlet #o="outlet"></router-outlet>
+        </div>
+        <sidePanel></sidePanel>
     </div>
 </div>

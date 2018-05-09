@@ -1,15 +1,17 @@
-import { Directive, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Directive, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, SimpleChanges, OnChanges } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
 /**
  * Directive that debounce an element that supports keyListener
+ * @example 
+ * <input type="text" debounce-input (debounce)="doSomething($event.target.value)" [debounceTime]="200" />
  */
 @Directive({
   selector: '[debounce-input]'
 })
-export class DebounceInputDirective implements OnInit, OnDestroy {
+export class DebounceInputDirective implements OnInit, OnDestroy, OnChanges {
   /**
    * Describe the debounce time; Default: 500ms
    */
@@ -17,7 +19,7 @@ export class DebounceInputDirective implements OnInit, OnDestroy {
   /**
    * Emit and call function after the debounce time
    */
-  @Output() debounceClick = new EventEmitter();
+  @Output() debounce = new EventEmitter();
   /**
    * Observable that register the flow
    */
@@ -33,11 +35,17 @@ export class DebounceInputDirective implements OnInit, OnDestroy {
    * Register observable pipe that describe the flow of the debounce directive
    */
   ngOnInit() {
+    this.createSubsription()
+  }
+  createSubsription(){
     this.subscription = this.subject.pipe(
       debounceTime(this.debounceTime)
-    ).subscribe(e => this.debounceClick.emit(e));
+    ).subscribe(e => this.debounce.emit(e));
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.debounceTime && this.subject.observers[0]) this.subject.observers[0]['dueTime'] = changes.debounceTime.currentValue
+  }
   /**
    * Unregister observable on the component destruct
    */
@@ -47,7 +55,6 @@ export class DebounceInputDirective implements OnInit, OnDestroy {
 
   /**
    * Trigger keyup event and inject it to the pipe of the debounce 
-   * @param {Object} event  
    */
   @HostListener('keyup', ['$event'])
   keyupEvent(event) {

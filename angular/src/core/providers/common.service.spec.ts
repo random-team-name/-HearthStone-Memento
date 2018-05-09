@@ -36,44 +36,44 @@ describe('CommonService', () => {
       clearTimeout(timeout)
     })
   })
-  describe('#exportAsCSV', () => {
-    it('it export', () => {
-      const datatable = jasmine.createSpyObj('DatatableComponent', ['dummy'])
-      datatable.columns = [
-        { name: 'name', prop: 'name' },
-        { prop: 'firstname', name: 'firstname' },
-        { prop: 'noValue', name: 'noValue' },
-        { prop: 'noName' },
-        { prop: 'boolean', name: 'boolean' }
-      ]
+  // describe('#exportAsCSV', () => {
+  //   it('it export', () => {
+  //     const datatable = jasmine.createSpyObj('DatatableComponent', ['dummy'])
+  //     datatable.columns = [
+  //       { name: 'name', prop: 'name' },
+  //       { prop: 'firstname', name: 'firstname' },
+  //       { prop: 'noValue', name: 'noValue' },
+  //       { prop: 'noName' },
+  //       { prop: 'boolean', name: 'boolean' }
+  //     ]
 
-      const person1 = { name: 'Cécile', firstname: 'Ancieux', boolean: true }
-      const person2 = { name: 'Guy', firstname: 'De Michelin', boolean: false }
-      datatable.rows = [
-        person1,
-        person2
-      ]
-      let csv: Angular2Csv = service.exportAsCSV(datatable, 'hey')
-      expect(csv['_options'].filename).toEqual('hey')
+  //     const person1 = { name: 'Cécile', firstname: 'Ancieux', boolean: true }
+  //     const person2 = { name: 'Guy', firstname: 'De Michelin', boolean: false }
+  //     datatable.rows = [
+  //       person1,
+  //       person2
+  //     ]
+  //     let csv: Angular2Csv = service.exportAsCSV(datatable, 'hey')
+  //     expect(csv['_options'].filename).toEqual('hey')
 
-      expect(csv instanceof Angular2Csv)
-      expect(csv.data[0].noValue).toEqual("")
-      expect(!csv.data[0].hasOwnProperty('noName')).toEqual(true)
-      expect(csv.data[0].firstname).toEqual(person1.firstname)
-      expect(csv.data[0].name).toEqual(person1.name)
-      expect(csv.data[0].boolean).toEqual('Oui')
+  //     expect(csv instanceof Angular2Csv)
+  //     expect(csv.data[0].noValue).toEqual("")
+  //     expect(!csv.data[0].hasOwnProperty('noName')).toEqual(true)
+  //     expect(csv.data[0].firstname).toEqual(person1.firstname)
+  //     expect(csv.data[0].name).toEqual(person1.name)
+  //     expect(csv.data[0].boolean).toEqual('Oui')
 
-      expect(csv.data[1].noValue).toEqual("")
-      expect(!csv.data[1].hasOwnProperty('noName')).toEqual(true)
-      expect(csv.data[1].firstname).toEqual(person2.firstname)
-      expect(csv.data[1].name).toEqual(person2.name)
-      expect(csv.data[1].boolean).toEqual('Non')
+  //     expect(csv.data[1].noValue).toEqual("")
+  //     expect(!csv.data[1].hasOwnProperty('noName')).toEqual(true)
+  //     expect(csv.data[1].firstname).toEqual(person2.firstname)
+  //     expect(csv.data[1].name).toEqual(person2.name)
+  //     expect(csv.data[1].boolean).toEqual('Non')
 
 
-      csv = service.exportAsCSV(datatable)
-      expect(csv['_options'].filename).toEqual('Export')
-    })
-  })
+  //     csv = service.exportAsCSV(datatable)
+  //     expect(csv['_options'].filename).toEqual('Export')
+  //   })
+  // })
   describe('#flatten', () => {
     it('it flat', async () => {
       const result = service.flatten({

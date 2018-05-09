@@ -4,7 +4,6 @@ import { NotificationsComponent } from './notifications.component';
 import { NotificationsService } from '../providers/notifications.service';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
-import { CommonService } from '../providers/common.service';
 
 
 describe('NotificationsComponent', () => {
@@ -13,7 +12,7 @@ describe('NotificationsComponent', () => {
       declarations: [
         NotificationsComponent
       ],
-      providers: [NotificationsService, CommonService]      
+      providers: [NotificationsService]      
     }).compileComponents();
   }));
   it('should create the app', async(() => {
@@ -40,19 +39,50 @@ describe('NotificationsComponent', () => {
       expect(notif.childElementCount).toEqual(2)
     });
   });
-  describe('#delete', () => {
+  describe("#delete", () => {
     it(`should delete a notif`, async () => {
       const fixture = TestBed.createComponent(NotificationsComponent);
       const app: NotificationsComponent = fixture.debugElement.componentInstance;
-      const notification = app.ns.add('test', 'body test')
-      app.ns.add('test', 'body test')
-      const notif: HTMLElement = fixture.debugElement.query(By.css('.notifsWrapper')).nativeElement
-      fixture.detectChanges()
-      expect(notif.childElementCount).toEqual(2)
-      app.ns.delete(notification.id)
-      await wait(800)
-      fixture.detectChanges()
-      expect(notif.childElementCount).toEqual(1)
+      const notification = app.ns.add("test", "body test");
+      app.ns.add("test", "body test");
+      const notif: HTMLElement = fixture.debugElement.query(By.css(".notifsWrapper")).nativeElement;
+      fixture.detectChanges();
+      expect(notif.childElementCount).toEqual(2);
+      app.ns.delete(notification.id);
+      await wait(800);
+      fixture.detectChanges();
+      expect(notif.childElementCount).toEqual(1);
+      app.deleteNotif(notification.id);
+      fixture.detectChanges();
+      expect(notif.childElementCount).toEqual(1);      
+      
+    });
+  });
+  describe("#deleteAll", () => {
+    it(`should delete all notif`, async () => {
+      const fixture = TestBed.createComponent(NotificationsComponent);
+      const app: NotificationsComponent = fixture.debugElement.componentInstance;
+      const notification = app.ns.add("test", "body test");
+      app.ns.add("test", "body test");
+      const notif: HTMLElement = fixture.debugElement.query(By.css(".notifsWrapper")).nativeElement;
+      fixture.detectChanges();
+      expect(notif.childElementCount).toEqual(2);
+      app.deleteAll();
+      await wait(800);
+      fixture.detectChanges();
+      expect(notif.childElementCount).toEqual(0);
+    });
+  });
+  describe("#getHtmlNotif", () => {
+    it(`should get html`, async () => {
+      const fixture = TestBed.createComponent(NotificationsComponent);
+      const app: NotificationsComponent = fixture.debugElement.componentInstance;
+      const notification1 = app.ns.add("test", "body test");
+      const notification2 = app.ns.add("test", "body test");
+      const notif: HTMLElement = fixture.debugElement.query(By.css(".notifsWrapper")).nativeElement;
+      fixture.detectChanges();
+      expect(notif.children.item(0) === (await app.getHtmlNotif(notification1.id))).toBeTruthy();
+      expect(notif.children.item(1) === (await app.getHtmlNotif(notification2.id))).toBeTruthy();
     });
   });
 });

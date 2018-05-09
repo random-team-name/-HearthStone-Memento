@@ -5,17 +5,20 @@ import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { RouterModule } from '@angular/router';
 import { CoreModule } from '../core/core.module';
+import { CardListPageComponent } from './card-list-page/card-list-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomePageComponent
+    HomePageComponent,
+    CardListPageComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot([
       { path: '', redirectTo: '/home', pathMatch: 'full' },
       { path: 'home', component: HomePageComponent },
+      { path: 'card-list', component: CardListPageComponent },
       { path: '**', redirectTo: '/home', pathMatch: 'full' }
     ]),
     CoreModule.forRoot()

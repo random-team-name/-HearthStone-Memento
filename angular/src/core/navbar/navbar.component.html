@@ -2,19 +2,17 @@
   <div id="leftRight">
     <div id="left">
       <div id="logoContainer">
-        <div id="logo">
-          <img src="assets/img/logo.png" alt="">
-        </div>
+        <ng-content select="[logo]"></ng-content>
       </div>
       <div id="description">
-        Hearthston-memento
+        {{name}}
       </div>
     </div>
 
     <div id="right">
       <div id="actions">
-        <div class="icon">
-        </div>
+        <ng-content selector="[action]"></ng-content>
+      </div>
     </div>
   </div>
 </div>

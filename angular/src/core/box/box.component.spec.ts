@@ -1,8 +1,6 @@
 import { TestBed, async, tick, fakeAsync } from '@angular/core/testing';
 
 import { BoxComponent } from './box.component';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
 
 describe('BoxComponent', () => {
   beforeEach(async(() => {
