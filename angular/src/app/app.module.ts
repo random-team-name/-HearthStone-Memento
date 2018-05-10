@@ -10,12 +10,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { HearthsoneCardsService } from './providers/hearthsone-cards.service';
 import { ToArrayPipe } from './pipe/to-array.pipe';
+import { LazyLoading } from './directives/lazy-loading.directive';
+import { PaginationPipe } from './pipe/pagination.pipe';
+import { CustomPipe } from './pipe/custom.pipe';
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
     CardListPageComponent,
-    ToArrayPipe
+    ToArrayPipe,
+    LazyLoading,
+    PaginationPipe,
+    CustomPipe
   ],
   imports: [
     BrowserModule,

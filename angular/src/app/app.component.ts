@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Configuration } from "../core/sidebar/sidebar.component";
 import { routerTransition } from './app-routing.animation'
 
@@ -12,6 +12,7 @@ import {
   ActivatedRoute
 } from "@angular/router";
 import { merge } from 'rxjs';
+import { CommonService } from '../core/providers/common.service';
 
 
 /**
@@ -33,15 +34,19 @@ export class AppComponent implements OnInit {
    * Configuration of the navbar
    */
   navbarConf: Configuration
+
+  @ViewChild('appContainer') appContainer: ElementRef
   /**
    * Constructor of AppComponent
    * @param {SideBarService} sidebar Control the sidebar status
    */
   constructor(
-    private router: Router
+    private router: Router,
+    private common: CommonService
   ) { }
 
   ngOnInit() {
+    this.common.appContainer = this.appContainer
     const router = this.router
     this.navbarConf = {
       list: [

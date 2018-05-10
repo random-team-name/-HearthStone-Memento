@@ -17,6 +17,7 @@
                 }
             }
             .card-name{
+                min-height: 3em;
                 text-align: center;
             }
             .card-description{
@@ -29,7 +30,18 @@
                 height: 100%;
                 padding: 10px;
                 width: 100%;
+                box-sizing: border-box;
             }
         }
+    }
+}
+
+.pagination-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .action{
+        font-size: 2em;
+        padding: 10px;
     }
 }

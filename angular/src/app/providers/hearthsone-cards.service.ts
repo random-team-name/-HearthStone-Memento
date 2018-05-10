@@ -12,6 +12,12 @@ export class HearthsoneCardsService {
       headers:{
         "X-Mashape-Key": "iO8OmOZSY0mshfFfuJjYgUdFhzqkp1K34y0jsnAwyegP4Ge2O6"
       }
-    }).toPromise()
+    }).toPromise().then(data=>{
+      const array = []
+      Object.keys(data).map(key=>{
+        array.push(...data[key])
+      })
+      return array
+    })
   }
 }

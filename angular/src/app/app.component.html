@@ -7,7 +7,7 @@
     </navbar>
     <div id="appBody">
         <sidebar [conf]="navbarConf"></sidebar>
-        <div id="appContainer" [@routerTransition]="getState(o)">
+        <div id="appContainer" [@routerTransition]="getState(o)" #appContainer>
             <router-outlet #o="outlet"></router-outlet>
         </div>
         <sidePanel></sidePanel>

@@ -1,28 +1,27 @@
-<div class="type" *ngFor="let type of cards | toArray">
-    <h2>
-      {{type.key}}
-    </h2>
-    
-    <div class="cards-container">
-      <div class="card-container" *ngFor="let card of type.data; let i=index" (mouseenter)="hoverIndex = i">
-        <div class="card-cover">
-          <img [src]="card.img" [alt]="card.name">
-        </div>
-        <div class="card-name">
-          {{card.name}}
-        </div>
-        <div class="card-description" *ngIf='hoverIndex === i'>
-          ID: {{ card.cardId }}<br>
-          Collectible: {{ card.collectible }}<br>
-          {{ card.dbfId }}<br>
-          Faction: {{ card.faction }}<br>
-          Health: {{ card.health }}<br>
-          {{ card.locale }}<br>
-          Player class: {{ card.playerClass }}<br>
-          Rarity: {{ card.rarity }}<br>
-          Type: {{ card.type }}<br>
-        </div>
-      </div>
+Search a card by name
+<input type="text" (keyup)="filter($event.target.value)"> {{(cards | custom:filterFun).length}} cards found
+<div class="cards-container">
+  <div class="card-container" *ngFor="let card of cards | custom:filterFun | pagination:paginationMin:paginationMax; let i=index" (mouseenter)="hoverIndex = i" (mouseleave)="hoverIndex = -1">
+    <div class="card-cover">
+      <img lazyLoading imgError='/assets/img/empty-cards.png' [img]='card.img' src='/assets/img/empty-cards.png' [alt]="card.name">
     </div>
-
+    <div class="card-name">
+      {{card.name}}
+    </div>
+    <div class="card-description" *ngIf='hoverIndex === i'>
+      ID: {{ card.cardId }}<br>
+      Collectible: {{ card.collectible }}<br>
+      {{ card.dbfId }}<br>
+      Faction: {{ card.faction }}<br>
+      Health: {{ card.health }}<br>
+      {{ card.locale }}<br>
+      Player class: {{ card.playerClass }}<br>
+      Rarity: {{ card.rarity }}<br>
+      Type: {{ card.type }}<br>
+    </div>
+  </div>
+</div>
+<div class="pagination-container">
+  <div class="action" (click)="previous()"><i class="fa fa-step-backward"></i></div>
+  <div class="action" (click)="next()"><i class="fa fa-step-forward"></i></div>
 </div>

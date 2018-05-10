@@ -1,6 +1,7 @@
-import { Injectable } from "@angular/core";
+import { Injectable, ElementRef } from "@angular/core";
 import * as _ from 'lodash'
 import { Angular2Csv } from 'angular2-csv'
+import { Subject } from "rxjs";
 
 /**
  * Describe differences between two object
@@ -25,26 +26,15 @@ export interface differences {
  */
 @Injectable()
 export class CommonService {
-  /**
-   * Api URL
-   */
-  api: string
-  /**
-   * GraphQL URL
-   */
-  graphQL: string
-  /**
-   * Interval in ms between two refresh
-   */
-  refreshTokenInterval: number
-
+  appContainer: ElementRef
+  scrollSubject: Subject<any> = new Subject()
   /**
    * Instanciate all members
    */
   constructor(){
-    this.api = "http://localhost:3000"
-    this.graphQL = this.api + '/graphql'
-    this.refreshTokenInterval = 4000
+    window.addEventListener('scroll', () => {
+      this.scrollSubject.next()
+    }, true)
   }
 
   /**
