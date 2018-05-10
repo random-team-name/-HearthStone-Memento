@@ -1,0 +1,35 @@
+:host{
+    h2{
+        width: 100%;
+        text-align: center;
+    }
+    .cards-container{
+        display: flex;
+        flex-wrap: wrap;
+
+        .card-container{
+            position: relative;
+            width: 12.5%;
+            .card-cover{
+                width:100%;
+                img{
+                    width:100%;
+                }
+            }
+            .card-name{
+                text-align: center;
+            }
+            .card-description{
+                display: flex;
+                align-items: center;
+                color: white;
+                background-color: rgba(0,0,0,0.6);
+                position: absolute;
+                top:0;
+                height: 100%;
+                padding: 10px;
+                width: 100%;
+            }
+        }
+    }
+}

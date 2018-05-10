@@ -6,15 +6,21 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { RouterModule } from '@angular/router';
 import { CoreModule } from '../core/core.module';
 import { CardListPageComponent } from './card-list-page/card-list-page.component';
-
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { HearthsoneCardsService } from './providers/hearthsone-cards.service';
+import { ToArrayPipe } from './pipe/to-array.pipe';
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
-    CardListPageComponent
+    CardListPageComponent,
+    ToArrayPipe
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot([
       { path: '', redirectTo: '/home', pathMatch: 'full' },
       { path: 'home', component: HomePageComponent },
@@ -23,7 +29,9 @@ import { CardListPageComponent } from './card-list-page/card-list-page.component
     ]),
     CoreModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    HearthsoneCardsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
