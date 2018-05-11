@@ -24,6 +24,7 @@
     "angular-playground": "^4.0.1",
     "angular2-csv": "^0.2.5",
     "core-js": "^2.5.4",
+    "fast-sort": "^1.2.6",
     "font-awesome": "^4.7.0",
     "rxjs": "^6.0.0",
     "rxjs-compat": "^6.1.0",

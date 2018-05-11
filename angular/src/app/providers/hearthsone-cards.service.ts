@@ -1,6 +1,24 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+
+/**
+ * card = { 
+ *   cardId
+ *   cardSet
+ *   collectible
+ *   dbfId
+ *   faction
+ *   health
+ *   img
+ *   imgGold
+ *   locale
+ *   name
+ *   playerClass
+ *   rarity
+ *   type
+ * }
+ */
 @Injectable({
   providedIn: 'root'
 })

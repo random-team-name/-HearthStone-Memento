@@ -1,7 +1,36 @@
-Search a card by name
-<input type="text" (keyup)="filter($event.target.value)"> {{(cards | custom:filterFun).length}} cards found
+Search a card by <select #filterBy>
+  <option value="cardId">cardId</option>
+  <option value="cardSet">cardSet</option>
+  <option value="collectible">collectible</option>
+  <option value="dbfId">dbfId</option>
+  <option value="faction">faction</option>
+  <option value="health">health</option>
+  <option value="img">img</option>
+  <option value="imgGold">imgGold</option>
+  <option value="locale">locale</option>
+  <option value="name" selected>name</option>
+  <option value="playerClass">playerClass</option>
+  <option value="rarity">rarity</option>
+  <option value="type">type</option>
+</select>
+<input type="text" (keyup)="filter($event.target.value, filterBy.value)"> {{(cards | filter:filterFun).length}} cards found
+<select (change)="orderBy($event.target.value)">
+  <option value="cardId">cardId</option>
+  <option value="cardSet">cardSet</option>
+  <option value="collectible">collectible</option>
+  <option value="dbfId">dbfId</option>
+  <option value="faction">faction</option>
+  <option value="health">health</option>
+  <option value="img">img</option>
+  <option value="imgGold">imgGold</option>
+  <option value="locale">locale</option>
+  <option value="name" selected>name</option>
+  <option value="playerClass">playerClass</option>
+  <option value="rarity">rarity</option>
+  <option value="type">type</option>
+</select>
 <div class="cards-container">
-  <div class="card-container" *ngFor="let card of cards | custom:filterFun | pagination:paginationMin:paginationMax; let i=index" (mouseenter)="hoverIndex = i" (mouseleave)="hoverIndex = -1">
+  <div class="card-container" *ngFor="let card of cards | filter:filterFun | order:orderByFun |pagination:paginationMin:paginationMax; let i=index" (mouseenter)="hoverIndex = i" (mouseleave)="hoverIndex = -1">
     <div class="card-cover">
       <img lazyLoading imgError='/assets/img/empty-cards.png' [img]='card.img' src='/assets/img/empty-cards.png' [alt]="card.name">
     </div>
