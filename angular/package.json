@@ -11,8 +11,8 @@
     "electron": "electron ./electron.dev.js",
     "watchElectron": "cp electron.dev.js www/ && cp package.json www/ && concurrently --kill-others \"cd www && npm run electron\" \"npm run start\"",
     "buildElectron": "npm run build && cp electron.js www/index.js && cp package.json www/",
-    "package-linux": "npm run buildElectron && electron-packager ./www --overwrite --platform=linux --arch=x64, --out=build",
-    "package-windows": "npm run buildElectron && electron-packager ./www--overwrite --platform=win32 --arch=x64 --out=build",
+    "package-linux": "electron-packager ./www --overwrite --platform=linux --arch=x64 --out=build",
+    "package-windows": "electron-packager ./www --overwrite --platform=win32 --arch=x64 --out=build",
     "watch": "ng build -op www -w --base-href . "
   },
   "private": true,

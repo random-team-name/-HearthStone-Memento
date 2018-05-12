@@ -15,6 +15,7 @@ before_install:
 script: 
   - cd angular
   - npm i 
+  - npm run buildElectron
   - npm run package-linux
   - npm run package-windows
 before_deploy: 
