@@ -4,10 +4,15 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --prod --base-href .",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "electron": "electron ./electron.dev.js",
+    "watchElectron": "cp electron.dev.js www/ && cp package.json www/ && concurrently --kill-others \"cd www && npm run electron\" \"npm run start\"",
+    "buildElectron": "npm run build && cp electron.js www/index.js && cp package.json www/",
+    "package-linux": "npm run buildElectron && electron-packager ./www --overwrite --platform=linux --arch=x64 --out=build",
+    "watch": "ng build -op www -w --base-href . "
   },
   "private": true,
   "dependencies": {
@@ -39,6 +44,9 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "codelyzer": "~4.2.1",
+    "concurrently": "^3.5.1",
+    "electron": "^2.0.0",
+    "electron-packager": "^12.0.2",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~1.7.1",
