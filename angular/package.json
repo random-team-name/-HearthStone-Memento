@@ -1,6 +1,6 @@
 {
   "name": "angular",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -14,9 +14,9 @@
     "package-linux": "electron-packager ./www --overwrite --platform=linux --arch=x64 --out=build",
     "package-windows": "electron-packager ./www --overwrite --platform=win32 --arch=x64 --out=build",
     "watch": "ng build -op www -w --base-href . ",
-    "patch": "npm version patch && git push origin master --follow-tags",
-    "minor": "npm version minor && git push origin master --follow-tags",
-    "major": "npm version major && git push origin master --follow-tags"
+    "patch": "npm version patch && git add . && git commit -m 'patch' && git push origin master --follow-tags",
+    "minor": "npm version minor && git add . && git commit -m 'minor' && git push origin master --follow-tags",
+    "major": "npm version major && git add . && git commit -m 'major' && git push origin master --follow-tags"
   },
   "private": true,
   "dependencies": {
