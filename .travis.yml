@@ -15,7 +15,7 @@ before_install:
 script: 
   - cd angular && npm i 
   - cd angular && npm run package-linux
-before_deploy:
+before_deploy: 
   - cd build
   - bash ../script/zip.sh
   - export RELEASE_PKG_FILE=$(ls *.zip)
