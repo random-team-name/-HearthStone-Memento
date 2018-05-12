@@ -13,12 +13,11 @@ before_install:
   # - sudo apt-get update
   # - sudo apt-get install --no-install-recommends -y mono-devel ca-certificates-mono wine1.8 gcc-multilib g++-multilib
 script: 
-  - npm update -g npm
+  - npm i -g @angular/cli
   - cd angular && npm run package-linux
 before_deploy:
   - cd build
   - bash ../script/zip.sh
-  - npm i -g @angular/cli
   - export RELEASE_PKG_FILE=$(ls *.zip)
   - echo "deploying $RELEASE_PKG_FILE to GitHub releases"
 deploy:
