@@ -31,6 +31,12 @@ Search a card by
   <option value="type">type</option>
 </select>
 <div class="cards-container">
+
+  <div class="load" *ngIf='!cards.length'>
+    <div class="seeker">
+      <div class="seekerPulse"></div>
+    </div>
+  </div>
   <div class="card-container" *ngFor="let card of cards | filter:filterFunorderByFun |pagination:paginationMin:paginationMax; let i=index" (mouseenter)="hoverIndex = i" (mouseleave)="hoverIndex = -1">
     <div class="card-cover">
       <img lazyLoading imgError='/assets/img/empty-cards.png' [img]='card.img' src='/assets/img/empty-cards.png' [alt]="card.name">
