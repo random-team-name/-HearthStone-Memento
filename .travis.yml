@@ -14,7 +14,7 @@ before_install:
   # - sudo apt-get install --no-install-recommends -y mono-devel ca-certificates-mono wine1.8 gcc-multilib g++-multilib
 script: 
   - cd angular && npm i 
-  - cd angular && npm run package-linux
+  - npm run package-linux
 before_deploy: 
   - cd build
   - bash ../script/zip.sh
