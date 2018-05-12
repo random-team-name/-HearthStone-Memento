@@ -12,7 +12,8 @@ import { HearthsoneCardsService } from './providers/hearthsone-cards.service';
 import { ToArrayPipe } from './pipe/to-array.pipe';
 import { LazyLoading } from './directives/lazy-loading.directive';
 import { PaginationPipe } from './pipe/pagination.pipe';
-import { CustomPipe } from './pipe/custom.pipe';
+import { FilterPipe } from './pipe/filter.pipe';
+import { OrderPipe } from './pipe/order.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +22,8 @@ import { CustomPipe } from './pipe/custom.pipe';
     ToArrayPipe,
     LazyLoading,
     PaginationPipe,
-    CustomPipe
+    FilterPipe,
+    OrderPipe
   ],
   imports: [
     BrowserModule,

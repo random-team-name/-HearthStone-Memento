@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HearthsoneCardsService } from '../providers/hearthsone-cards.service';
-
+import sort from 'fast-sort';
 @Component({
   selector: 'app-card-list-page',
   templateUrl: './card-list-page.component.html',
@@ -14,6 +14,7 @@ export class CardListPageComponent implements OnInit {
   paginationMax = 16
   pageSize = 16
   filterFun = function(value){return value}
+  orderByFun= function(value){return value}
   ngOnInit() {
     this.cardsService.allCards().then(data=>{
       console.log(data)
@@ -40,13 +41,25 @@ export class CardListPageComponent implements OnInit {
     this.paginationMin -= this.pageSize
   }
 
-  filter(search){
+  filter(search, property = "name"){
     this.filterFun = function(cards) {
-      return cards.filter(card => {
-        if(card.name){
-          return card.name.toUpperCase().includes(search.toUpperCase())
+      const card= cards.filter(card => {
+        if(card[property]){
+          return card[property].toUpperCase().includes(search.toUpperCase())
         } return false
       })
+      console.log('filter', cards.length)
+      return card
+    }
+  }
+
+  orderBy(order:string){
+    this.filterFun = function (cards) {
+      const card = sort(cards).asc((p) => {
+        return p[order]
+      });
+      console.log('order', cards.length)
+      return card
     }
   }
 }
