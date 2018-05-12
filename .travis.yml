@@ -18,6 +18,7 @@ script:
 before_deploy:
   - cd build
   - bash ../script/zip.sh
+  - npm i -g @angular/cli
   - export RELEASE_PKG_FILE=$(ls *.zip)
   - echo "deploying $RELEASE_PKG_FILE to GitHub releases"
 deploy:
