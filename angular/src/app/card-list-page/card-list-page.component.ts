@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { HearthsoneCardsService } from '../providers/hearthsone-cards.service';
 import sort from 'fast-sort';
 @Component({
@@ -13,8 +13,10 @@ export class CardListPageComponent implements OnInit {
   paginationMin = 0
   paginationMax = 16
   pageSize = 16
-  filterFun = function(value){return value}
-  orderByFun= function(value){return value}
+  @ViewChild('orderBySelect') orderBySelect: ElementRef
+  @ViewChild('filterBySelect') filterBySelect: ElementRef
+  @ViewChild('filterInput') filterInput: ElementRef
+  filterFunorderByFun = function(value){return value}
   ngOnInit() {
     this.cardsService.allCards().then(data=>{
       console.log(data)
@@ -41,25 +43,22 @@ export class CardListPageComponent implements OnInit {
     this.paginationMin -= this.pageSize
   }
 
-  filter(search, property = "name"){
-    this.filterFun = function(cards) {
-      const card= cards.filter(card => {
-        if(card[property]){
-          return card[property].toUpperCase().includes(search.toUpperCase())
+  filter(){
+    const search = this.filterInput.nativeElement.value
+    const propertyToSearch = this.filterBySelect.nativeElement.value
+    const orderProperty = this.orderBySelect.nativeElement.value
+    this.filterFunorderByFun = function(cards) {
+      cards = cards.filter(card => {
+        if(card[propertyToSearch]){          
+          return card[propertyToSearch].toUpperCase().includes(search.toUpperCase())
         } return false
       })
-      console.log('filter', cards.length)
-      return card
-    }
-  }
 
-  orderBy(order:string){
-    this.filterFun = function (cards) {
-      const card = sort(cards).asc((p) => {
-        return p[order]
+      console.log(search, propertyToSearch, orderProperty)
+      cards = sort(cards).asc((p) => {
+        return p[orderProperty]
       });
-      console.log('order', cards.length)
-      return card
+      return cards
     }
   }
 }
