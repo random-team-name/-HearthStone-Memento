@@ -13,8 +13,11 @@
     "buildElectron": "npm run build && cp electron.js www/index.js && cp package.json www/",
     "package-linux": "electron-packager ./www --overwrite --platform=linux --arch=x64 --out=build",
     "package-windows": "electron-packager ./www --overwrite --platform=win32 --arch=x64 --out=build",
-    "watch": "ng build -op www -w --base-href . "
-  },
+    "watch": "ng build -op www -w --base-href . ",
+    "patch": "git add . && git commit -m 'patch' && git push origin master --follow-tags",
+    "minor": "git add . && git commit -m 'minor' && git push origin master --follow-tags",
+    "major": "git add . && git commit -m 'major' && git push origin master --follow-tags"
+  }, 
   "private": true,
   "dependencies": {
     "@angular/animations": "^6.0.0",
